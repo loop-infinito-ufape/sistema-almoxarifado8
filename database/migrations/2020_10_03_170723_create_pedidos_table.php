@@ -24,8 +24,10 @@ class CreatePedidosTable extends Migration
             $table->string('observacao')->nullable();
             
             $table->integer('funcionario_id')->unsigned()->nullable();
+            $table->integer('servidor_id')->unsigned();
             
             $table->foreign('funcionario_id')->references('id')->on('funcionarios');
+            $table->foreign('servidor_id')->references('id')->on('servidors');
 
             $table->timestamps();
         });
