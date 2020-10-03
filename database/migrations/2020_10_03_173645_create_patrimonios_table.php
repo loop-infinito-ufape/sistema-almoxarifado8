@@ -19,8 +19,10 @@ class CreatePatrimoniosTable extends Migration
             $table->integer('status');
             
             $table->integer('pedido_id')->unsigned()->nullable();
+            $table->integer('tipo_equipamento_id')->unsigned();
 
             $table->foreign('pedido_id')->references('id')->on('pedidos');
+            $table->foreign('tipo_equipamento_id')->references('id')->on('tipo_equipamentos');
             
             $table->timestamps();
         });

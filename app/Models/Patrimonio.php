@@ -13,4 +13,8 @@ class Patrimonio extends Model
     	return $this->belongsTo('app\Models\Pedido');
     }
 
+    public function tipoEquipamento(){
+    	return $this->belongsTo('app\Models\TipoEquipamento');
+    }
+
 }

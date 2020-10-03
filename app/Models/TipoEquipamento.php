@@ -12,4 +12,8 @@ class TipoEquipamento extends Model
     public function pedido(){
     	return $this->hasMany('app\Models\Pedido');
     }
+
+    public function patrimonio(){
+    	return $this->hasMany('app\Models\Patrimonio');
+    }
 }
