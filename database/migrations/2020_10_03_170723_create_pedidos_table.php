@@ -23,6 +23,10 @@ class CreatePedidosTable extends Migration
             $table->integer('status');
             $table->string('observacao')->nullable();
             
+            $table->integer('funcionario_id')->unsigned()->nullable();
+            
+            $table->foreign('funcionario_id')->references('id')->on('funcionarios');
+
             $table->timestamps();
         });
     }

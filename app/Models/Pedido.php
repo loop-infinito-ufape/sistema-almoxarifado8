@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Pedido extends Model
 {
     use HasFactory;
+
+    public function funcionario(){
+    	return $this->belongsTo('app\Models\Funcionario');
+    } 
 }

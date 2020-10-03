@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Funcionario extends Model
 {
     use HasFactory;
+
+    public function pedido(){
+    	return $this->hasMany('app\Models\Pedido');
+    }
 }
