@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Patrimonio extends Model
 {
     use HasFactory;
+
+    public function pedido(){
+    	return $this->belongsTo('app\Models\Pedido');
+    }
+
 }
