@@ -24,4 +24,8 @@ class Pedido extends Model
     public function patrimonio(){
         return $this->hasMany('app\Models\Patrimonio');
     }
+
+     public function pedidoAnterior(){
+        return $this->belongsTo('app\Models\Pedido');
+    }
 }
