@@ -16,4 +16,8 @@ class Pedido extends Model
     public function servidor(){
     	return $this->belongsTo('app\Models\Servidor');
     }
+
+    public function tipoEquipamento(){
+    	return $this->belongsTo('app\Models\TipoEquipamento');
+    }
 }

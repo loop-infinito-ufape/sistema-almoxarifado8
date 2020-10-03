@@ -25,9 +25,11 @@ class CreatePedidosTable extends Migration
             
             $table->integer('funcionario_id')->unsigned()->nullable();
             $table->integer('servidor_id')->unsigned();
+            $table->integer('tipo_equipamento_id')->unsigned();
             
             $table->foreign('funcionario_id')->references('id')->on('funcionarios');
             $table->foreign('servidor_id')->references('id')->on('servidors');
+            $table->foreign('tipo_equipamento_id')->references('id')->on('tipo_equipamentos');
 
             $table->timestamps();
         });
