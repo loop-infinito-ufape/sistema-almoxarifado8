@@ -21,6 +21,10 @@ class CreateServidorsTable extends Migration
             $table->string('email');
             $table->string('senha');
             $table->string('if');
+
+            $table->integer('sala_id')->unsigned()->nullable();
+            
+            $table->foreign('sala_id')->references('id')->on('salas');
             
             $table->timestamps();
         });

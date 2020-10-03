@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Sala extends Model
 {
     use HasFactory;
+
+    public function servidor(){
+    	return $this->hasMany('app\Models\Servidor');
+    }
 }

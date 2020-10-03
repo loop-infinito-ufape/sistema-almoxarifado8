@@ -12,4 +12,8 @@ class Servidor extends Model
     public function pedido(){
     	return $this->hasMany('app\Models\Pedido');
     }
+
+    public function sala(){
+    	return $this->belongsTo('app\Models\Sala');
+    }
 }
