@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FuncionarioController;
+use App\Http\Controllers\SalaController;
 use App\Http\Controllers\ServidorController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,7 @@ Route::post('funcionario/cadastrar', [FuncionarioController::class, 'cadastrar']
 //servidor
 Route::get('servidor/cadastrar', [ServidorController::class, 'prepararCadastro']);
 Route::post('servidor/cadastrar', [ServidorController::class, 'cadastrar'])->name('servidor.criar');
+
+//sala
+Route::get('sala/cadastrar', [SalaController::class, 'prepararCadastro']);
+Route::post('sala/cadastrar', [SalaController::class, 'cadastrar'])->name('sala.criar');
