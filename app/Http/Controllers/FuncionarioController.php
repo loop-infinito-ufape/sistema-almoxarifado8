@@ -25,7 +25,7 @@ class FuncionarioController extends Controller
             Funcionario::create($dados);
             return "Funcionario criado";
         }catch (ValidationException $exception){
-            return redirect('cadastrar')
+            return redirect(route('funcionario.criar') )
                 ->withErrors($exception->getValidator())
                 ->withInput();
         }

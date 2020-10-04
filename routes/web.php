@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('cadastrar', [\App\Http\Controllers\FuncionarioController::class, 'prepararCadastro']);
-Route::post('/cadastrar', [\App\Http\Controllers\FuncionarioController::class, 'cadastrar'])->name('funcionario.criar');
+Route::get('funcionario/cadastrar', [\App\Http\Controllers\FuncionarioController::class, 'prepararCadastro']);
+Route::post('funcionario/cadastrar', [\App\Http\Controllers\FuncionarioController::class, 'cadastrar'])->name('funcionario.criar');
 
