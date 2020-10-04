@@ -3,6 +3,7 @@
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\SalaController;
 use App\Http\Controllers\ServidorController;
+use App\Http\Controllers\TipoEquipamentoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,3 +32,7 @@ Route::post('servidor/cadastrar', [ServidorController::class, 'cadastrar'])->nam
 //sala
 Route::get('sala/cadastrar', [SalaController::class, 'prepararCadastro']);
 Route::post('sala/cadastrar', [SalaController::class, 'cadastrar'])->name('sala.criar');
+
+//Tipo Equipamento
+Route::get('tipoEquipamento/cadastrar', [TipoEquipamentoController::class, 'prepararCadastro']);
+Route::post('tipoEquipamento/cadastrar', [TipoEquipamentoController::class, 'cadastrar'])->name('tipoEquipamento.criar');
