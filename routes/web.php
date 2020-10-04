@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\PatrimonioController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\SalaController;
 use App\Http\Controllers\ServidorController;
 use App\Http\Controllers\TipoEquipamentoController;
@@ -41,3 +42,7 @@ Route::post('tipoEquipamento/cadastrar', [TipoEquipamentoController::class, 'cad
 //Patrimonio
 Route::get('patrimonio/cadastrar', [PatrimonioController::class, 'prepararCadastro']);
 Route::post('patrimonio/cadastrar', [PatrimonioController::class, 'cadastrar'])->name('patrimonio.criar');
+
+//Patrimonio
+Route::get('pedido/cadastrar', [PedidoController::class, 'prepararCadastro']);
+Route::post('pedido/cadastrar', [PedidoController::class, 'cadastrar'])->name('pedido.criar');
