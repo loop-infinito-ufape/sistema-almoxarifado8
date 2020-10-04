@@ -21,6 +21,7 @@ class Funcionario extends Model
                             'telefone' => 'required|size:11',
                             'email' => 'required|email',
                             'senha' => 'required|min:8'
+
         ];
 
     public static $messages = ['nome.*' => "O campo deve contêr entre 10 e 100 caracteres.",

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FuncionarioController;
+use App\Http\Controllers\ServidorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('funcionario/cadastrar', [\App\Http\Controllers\FuncionarioController::class, 'prepararCadastro']);
-Route::post('funcionario/cadastrar', [\App\Http\Controllers\FuncionarioController::class, 'cadastrar'])->name('funcionario.criar');
+//funcionario
+Route::get('funcionario/cadastrar', [FuncionarioController::class, 'prepararCadastro']);
+Route::post('funcionario/cadastrar', [FuncionarioController::class, 'cadastrar'])->name('funcionario.criar');
 
+//servidor
+Route::get('servidor/cadastrar', [ServidorController::class, 'prepararCadastro']);
+Route::post('servidor/cadastrar', [ServidorController::class, 'cadastrar'])->name('servidor.criar');
