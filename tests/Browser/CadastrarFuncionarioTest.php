@@ -52,4 +52,21 @@ class CadastrarFuncionarioTest extends DuskTestCase
                     ->assertSee('CPF inválido.');
             });
     }
+
+    public function testFunionarioNomeInvalido(){
+        $funcionario = Funcionario::factory()->make();
+        $this->browse(
+            function (Browser $browser) use ($funcionario) {
+                $browser->visit(route('funcionario.criar'))
+                    ->pause(2000)
+                    ->type('nome','felipe')
+                    ->type('cpf', $funcionario->cpf)
+                    ->type('telefone',$funcionario->telefone)
+                    ->type('email',$funcionario->email)
+                    ->type('senha',$funcionario->senha)
+                    ->press('Cadastrar')
+                    ->assertSee('O campo deve contêr entre 10 e 100 caracteres.')
+                    ->pause(10000);
+            });
+    }
 }
