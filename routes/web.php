@@ -46,3 +46,7 @@ Route::post('patrimonio/cadastrar', [PatrimonioController::class, 'cadastrar'])-
 //Patrimonio
 Route::get('pedido/cadastrar', [PedidoController::class, 'prepararCadastro']);
 Route::post('pedido/cadastrar', [PedidoController::class, 'cadastrar'])->name('pedido.criar');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
