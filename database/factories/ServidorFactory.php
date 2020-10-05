@@ -32,7 +32,7 @@ class ServidorFactory extends Factory
             'cpf' => $this->faker->cpf(false),
             'telefone' => $telefone,
             'email' => $this->faker->unique()->freeEmail,
-            'senha' => $this->faker->password(8,200),
+            'senha' => 'password',
             'if' => $if,
             'sala_id' => Sala::factory()->create()
         ];

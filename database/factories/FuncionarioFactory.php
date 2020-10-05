@@ -31,7 +31,7 @@ class FuncionarioFactory extends Factory
             'cpf' => $this->faker->cpf(false),
             'telefone' => $telefone,
             'email' => $this->faker->unique()->freeEmail,
-            'senha' => $this->faker->password(8,200)
+            'senha' => 'password'
         ];
     }
 }
