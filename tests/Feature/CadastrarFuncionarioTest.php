@@ -39,4 +39,15 @@ class CadastrarFuncionarioTest extends TestCase
             ->assertRedirect(route('funcionario.criar'))
             ->assertSessionHas('errors');
     }
+
+    public function testFuncionarioCpfInvalido(){
+        $funcionario = Funcionario::factory()->make();
+        $funcionario->cpf = '123';
+        $dados = $funcionario->toArray();
+        $response = $this
+            ->post(route('funcionario.criar'),$dados)
+            ->assertStatus(302)
+            ->assertRedirect(route('funcionario.criar'))
+            ->assertSessionHas('errors');
+    }
 }
