@@ -6,6 +6,7 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\SalaController;
 use App\Http\Controllers\ServidorController;
 use App\Http\Controllers\TipoEquipamentoController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*

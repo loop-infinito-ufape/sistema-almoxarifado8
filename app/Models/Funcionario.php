@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
 
 
-class Funcionario extends Model
+class Funcionario extends Authenticatable
 {
     use HasFactory;
 
@@ -30,6 +30,11 @@ class Funcionario extends Model
                                 'email.*'=> "Email inválido.",
                                 'senha.*'=> "Senha deve ter no mínimo 8 caracteres."
         ];
+
+    public function getAuthPassword()
+    {
+        return $this->senha;
+    }
 
     public function pedido(){
     	return $this->hasMany('app\Models\Pedido');
