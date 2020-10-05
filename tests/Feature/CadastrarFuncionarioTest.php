@@ -28,4 +28,15 @@ class CadastrarFuncionarioTest extends TestCase
             ->post('funcionario/cadastrar',$dados)
             ->assertStatus(200);
     }
+
+    public function testFuncionarioNomeInvalido(){
+        $funcionario = Funcionario::factory()->make();
+        $funcionario->nome = '';
+        $dados = $funcionario->toArray();
+        $response = $this
+            ->post(route('funcionario.criar'),$dados)
+            ->assertStatus(302)
+            ->assertRedirect(route('funcionario.criar'))
+            ->assertSessionHas('errors');
+    }
 }
