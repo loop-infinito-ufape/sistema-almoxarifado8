@@ -36,4 +36,20 @@ class CadastrarFuncionarioTest extends DuskTestCase
                     ->assertSee('Funcionario criado');
             });
     }
+
+    public function testFunionarioCPFInvalido(){
+        $funcionario = Funcionario::factory()->make();
+        $this->browse(
+            function (Browser $browser) use ($funcionario) {
+                $browser->visit(route('funcionario.criar'))
+                    ->pause(2000)
+                    ->type('nome',$funcionario->nome)
+                    ->type('cpf', '123')
+                    ->type('telefone',$funcionario->telefone)
+                    ->type('email',$funcionario->email)
+                    ->type('senha',$funcionario->senha)
+                    ->press('Cadastrar')
+                    ->assertSee('CPF inválido.');
+            });
+    }
 }
