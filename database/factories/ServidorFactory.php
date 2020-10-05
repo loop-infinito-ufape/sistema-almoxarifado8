@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Sala;
 use App\Models\Servidor;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 class ServidorFactory extends Factory
 {
@@ -32,7 +33,7 @@ class ServidorFactory extends Factory
             'cpf' => $this->faker->cpf(false),
             'telefone' => $telefone,
             'email' => $this->faker->unique()->freeEmail,
-            'senha' => 'password',
+            'senha' => Hash::make('password'),
             'if' => $if,
             'sala_id' => Sala::factory()->create()
         ];

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Funcionario;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 class FuncionarioFactory extends Factory
 {
@@ -31,7 +32,7 @@ class FuncionarioFactory extends Factory
             'cpf' => $this->faker->cpf(false),
             'telefone' => $telefone,
             'email' => $this->faker->unique()->freeEmail,
-            'senha' => 'password'
+            'senha' => Hash::make('password')
         ];
     }
 }
