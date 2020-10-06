@@ -6,6 +6,7 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\SalaController;
 use App\Http\Controllers\ServidorController;
 use App\Http\Controllers\TipoEquipamentoController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,3 +47,7 @@ Route::post('patrimonio/cadastrar', [PatrimonioController::class, 'cadastrar'])-
 //Patrimonio
 Route::get('pedido/cadastrar', [PedidoController::class, 'prepararCadastro']);
 Route::post('pedido/cadastrar', [PedidoController::class, 'cadastrar'])->name('pedido.criar');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
