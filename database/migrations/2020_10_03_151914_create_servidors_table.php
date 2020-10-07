@@ -15,17 +15,14 @@ class CreateServidorsTable extends Migration
     {
         Schema::create('servidors', function (Blueprint $table) {
             $table->id();
-            $table->string('nome');
-            $table->string('cpf');
-            $table->string('telefone');
-            $table->string('email');
-            $table->string('senha');
             $table->string('if');
 
             $table->integer('sala_id')->unsigned()->nullable();
-            
+            $table->integer('user_id')->unsigned();
+
             $table->foreign('sala_id')->references('id')->on('salas');
-            
+            $table->foreign('user_id')->references('id')->on('users');
+
             $table->timestamps();
         });
     }
