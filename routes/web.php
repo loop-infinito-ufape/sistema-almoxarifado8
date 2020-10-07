@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\FuncionarioRegisterController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\PatrimonioController;
 use App\Http\Controllers\PedidoController;
@@ -51,3 +52,5 @@ Route::post('pedido/cadastrar', [PedidoController::class, 'cadastrar'])->name('p
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/funcionarioRegister', [FuncionarioRegisterController::class, 'showRegistrationForm']);
+Route::post('/funcionarioRegister', [FuncionarioRegisterController::class, 'register'])->name('funcionario.register');

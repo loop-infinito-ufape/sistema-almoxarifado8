@@ -3,18 +3,22 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Funcionario;
 use App\Models\Sala;
 use App\Models\Servidor;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Utils\CpfValidation;
 use App\Validator\UserValidator;
 use App\Validator\ValidationException;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use function Sodium\add;
 
-class RegisterController extends Controller
+class FuncionarioRegisterController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -34,7 +38,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -49,15 +53,17 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $salas = Sala::all();
-        return view('auth.register')
+        return view('auth.funcionarioRegister')
             ->with('salas', $salas);
     }
+
 
     public $rules = [
         'name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         'password' => ['required', 'string', 'min:8', 'confirmed'],
         'telefone' => ['required', 'size:11'],
+        'cpf' => ['required', 'cpf'],
     ];
 
     public $messages = [
@@ -67,8 +73,8 @@ class RegisterController extends Controller
         'password.confirmed' => "A confirmação de senha não corresponde.",
         'password.*' => "Senha deve ter no mínimo tamanho 8.",
         'telefone.*' => "Telefone inválido",
+        'cpf' => "CPF inválido",
     ];
-
     /**
      * Get a validator for an incoming registration request.
      *
@@ -77,16 +83,14 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, $this->rules , $this->messages);
+        return Validator::make($data, $this->rules, $this->messages);
     }
-
-
 
     /**
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\Models\User
+     * @return User
      */
     protected function create(array $data)
     {
@@ -97,9 +101,8 @@ class RegisterController extends Controller
             'telefone' => $data['telefone'],
         ]);
 
-        Servidor::create([
-            'if' => $data['if'],
-            'sala_id' => $data['sala_id'],
+        Funcionario::create([
+            'cpf' => $data['cpf'],
             'user_id' => $user->id,
         ]);
 

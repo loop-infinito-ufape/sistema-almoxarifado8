@@ -13,7 +13,7 @@ class Servidor extends Model
     use Notifiable;
 
   //  protected $fillable = ['nome', 'cpf', 'telefone', 'if', 'sala_id', 'email', 'senha'];
-    protected $fillable = ['if'];
+    protected $fillable = ['if', 'user_id', 'sala_id'];
 
     public static $rules = [//'nome' => 'required|min:10|max:100',
                            // 'cpf' => 'required|cpf',
