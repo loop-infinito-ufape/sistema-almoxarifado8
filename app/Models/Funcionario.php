@@ -13,16 +13,7 @@ class Funcionario extends Model
 
     use Notifiable;
 
-    protected $fillable = ['cpf',];
-
-    public static $rules = ['cpf' => 'required|cpf'];
-
-    public static $messages = [//'nome.*' => "O campo deve contêr entre 10 e 100 caracteres.",
-                                'cpf.*'=> "CPF inválido.",
-                              //  'telefone.*'=> "Telefone inválido.",
-                              //  'email.*'=> "Email inválido.",
-                              //  'senha.*'=> "Senha deve ter no mínimo 8 caracteres."
-        ];
+    protected $fillable = ['cpf', 'user_id'];
 
     public function pedido(){
     	return $this->hasMany('app\Models\Pedido');
