@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sala;
+use App\Models\Servidor;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -41,6 +43,13 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $salas = Sala::all();
+        return view('auth.register')
+            ->with('salas', $salas);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -53,6 +62,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'telefone' => ['required', 'size:11'],
         ]);
     }
 
@@ -64,10 +74,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'telefone' => $data['telefone'],
         ]);
+
+        Servidor::create([
+            'if' => $data['if'],
+            'sala_id' => $data['sala_id'],
+            'user_id' => $user->id,
+            ]);
+
+        return $user;
     }
 }

@@ -26,6 +26,47 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Telefone') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="telefone" type="text" class="form-control @error('telefone') is-invalid @enderror" name="telefone" value="{{ old('telefone') }}" required autocomplete="telefone" autofocus>
+
+                                @error('telefone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('IF') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="if" type="text" class="form-control @error('if') is-invalid @enderror" name="if" value="{{ old('if') }}" required autocomplete="if" autofocus>
+
+                                @error('if')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Sala') }}</label>
+
+                            <div class="col-md-6">
+                                <select id="sala_id"  class="form-control" name="sala_id" autocomplete="sala_id" autofocus>
+                                    <option value="">Indefina</option>
+                                    @foreach($salas as $sala)
+                                        <option value="{{$sala->id}}">{{$sala->nome}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
