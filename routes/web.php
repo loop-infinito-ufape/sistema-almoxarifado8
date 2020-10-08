@@ -59,3 +59,7 @@ Route::post('/funcionarioRegister', [FuncionarioRegisterController::class, 'regi
 //funcionario
 Route::get('/funcionario/editar', [FuncionarioController::class, 'prepararEditar'])->middleware('auth');
 Route::post('/funcionario/editar', [FuncionarioController::class, 'editar'])->name('funcionario.editar');
+
+//servidor
+Route::get('/servidor/editar', [ServidorController::class, 'prepararEditar'])->middleware('auth');
+Route::post('/servidor/editar', [ServidorController::class, 'editar'])->name('servidor.editar');

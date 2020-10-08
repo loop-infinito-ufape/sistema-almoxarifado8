@@ -15,7 +15,7 @@ class FuncionarioController extends Controller
     public function prepararEditar(){
         $user = User::find(Auth::user()->id);
         $funcionario = Funcionario::where('user_id', $user->id)->first();
-        return view('formEditarFuncionario',['user' => $user, 'funcionario' => $funcionario]);
+        return view('funcionario.formEditarFuncionario',['user' => $user, 'funcionario' => $funcionario]);
     }
     public function editar(Request $request){
         $user = Auth::user();
