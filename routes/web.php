@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 //sala
 Route::get('sala/cadastrar', [SalaController::class, 'prepararCadastro']);
@@ -48,13 +48,10 @@ Route::get('/funcionarioRegister', [FuncionarioRegisterController::class, 'showR
 Route::post('/funcionarioRegister', [FuncionarioRegisterController::class, 'register'])->name('funcionario.register');
 
 //funcionario
-Route::group(['middleware'=> 'FuncionarioMiddleware'], function() {
-
-    Route::get('/funcionario/editar', [FuncionarioController::class, 'prepararEditar']);
-    Route::post('/funcionario/editar', [FuncionarioController::class, 'editar'])->name('funcionario.editar');
-});
+Route::get('/funcionario/editar', [FuncionarioController::class, 'prepararEditar']);
+Route::post('/funcionario/editar', [FuncionarioController::class, 'editar'])->name('funcionario.editar');
 
 //servidor
-Route::get('/servidor/editar', [ServidorController::class, 'prepararEditar'])->middleware('auth');
+Route::get('/servidor/editar', [ServidorController::class, 'prepararEditar']);
 Route::post('/servidor/editar', [ServidorController::class, 'editar'])->name('servidor.editar');
 

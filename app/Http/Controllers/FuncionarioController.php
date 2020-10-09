@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Hash;
 
 class FuncionarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('FuncionarioMiddleware');
+    }
+
     public function prepararEditar(){
         $user = User::find(Auth::user()->id);
         $funcionario = Funcionario::where('user_id', $user->id)->first();

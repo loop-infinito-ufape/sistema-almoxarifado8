@@ -17,6 +17,9 @@ class FuncionarioMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        if(!Auth::check()){
+            return redirect(route('welcome'));
+        }
         if(Auth::user()->funcionario){
             return $next($request);
         }
