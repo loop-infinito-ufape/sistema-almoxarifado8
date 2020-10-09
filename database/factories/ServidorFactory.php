@@ -4,7 +4,9 @@ namespace Database\Factories;
 
 use App\Models\Sala;
 use App\Models\Servidor;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 class ServidorFactory extends Factory
 {
@@ -22,19 +24,12 @@ class ServidorFactory extends Factory
      */
     public function definition()
     {
-        $telefone = "";
-        for($i = 0; $i < 11; $i++){
-            $telefone = $telefone . strval($this->faker->randomDigit);
-        }
+
         $if = strval($this->faker->randomDigit).strval($this->faker->randomDigit).strval($this->faker->randomDigit);
         return [
-            'nome'=>$this->faker->name,
-            'cpf' => $this->faker->cpf(false),
-            'telefone' => $telefone,
-            'email' => $this->faker->unique()->freeEmail,
-            'senha' => 'password',
             'if' => $if,
-            'sala_id' => Sala::factory()->create()
+            'sala_id' => Sala::factory()->create(),
+            'user_id' => User::factory()->create()
         ];
     }
 }

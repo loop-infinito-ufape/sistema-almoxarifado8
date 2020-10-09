@@ -25,4 +25,18 @@ class FuncionarioValidatorTest extends TestCase
         $funcionario->nome = '';
         FuncionarioValidator::validate($funcionario->toArray());
     }
+
+    public function testFuncionarioCPFInvalido(){
+        $this->expectException(ValidationException::class);
+        $funcionario = Funcionario::factory()->make();
+        $funcionario->cpf = '123';
+        FuncionarioValidator::validate($funcionario->toArray());
+    }
+
+    public function testFuncionarioNomeInvalido(){
+        $this->expectException(ValidationException::class);
+        $funcionario = Funcionario::factory()->make();
+        $funcionario->nome = 'felipe';
+        FuncionarioValidator::validate($funcionario->toArray());
+    }
 }
