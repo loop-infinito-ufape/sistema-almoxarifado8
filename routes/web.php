@@ -26,12 +26,12 @@ Route::get('/', function () {
 });
 
 //funcionario
-Route::get('funcionario/cadastrar', [FuncionarioController::class, 'prepararCadastro']);
-Route::post('funcionario/cadastrar', [FuncionarioController::class, 'cadastrar'])->name('funcionario.criar');
+//Route::get('funcionario/cadastrar', [FuncionarioController::class, 'prepararCadastro']);
+//Route::post('funcionario/cadastrar', [FuncionarioController::class, 'cadastrar'])->name('funcionario.criar');
 
 //servidor
-Route::get('servidor/cadastrar', [ServidorController::class, 'prepararCadastro']);
-Route::post('servidor/cadastrar', [ServidorController::class, 'cadastrar'])->name('servidor.criar');
+//Route::get('servidor/cadastrar', [ServidorController::class, 'prepararCadastro']);
+//Route::post('servidor/cadastrar', [ServidorController::class, 'cadastrar'])->name('servidor.criar');
 
 //sala
 Route::get('sala/cadastrar', [SalaController::class, 'prepararCadastro']);
@@ -54,3 +54,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/funcionarioRegister', [FuncionarioRegisterController::class, 'showRegistrationForm']);
 Route::post('/funcionarioRegister', [FuncionarioRegisterController::class, 'register'])->name('funcionario.register');
+
+
+//funcionario
+Route::get('/funcionario/editar', [FuncionarioController::class, 'prepararEditar'])->middleware('auth');
+Route::post('/funcionario/editar', [FuncionarioController::class, 'editar'])->name('funcionario.editar');
+
+//servidor
+Route::get('/servidor/editar', [ServidorController::class, 'prepararEditar'])->middleware('auth');
+Route::post('/servidor/editar', [ServidorController::class, 'editar'])->name('servidor.editar');

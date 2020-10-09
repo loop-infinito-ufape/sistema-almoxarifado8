@@ -13,6 +13,18 @@ class Funcionario extends Model
 
     use Notifiable;
 
+    public static $rules = [
+        'name' => ['required', 'string', 'max:255'],
+        'telefone' => ['required', 'size:11'],
+        'cpf' => ['required', 'cpf'],
+    ];
+
+    public static $messages = [
+        'name.*' => "Nome é obrigatório e deve ter até 255 caracteres.",
+        'telefone.*' => "Telefone inválido",
+        'cpf.*' => "CPF inválido",
+    ];
+
     protected $fillable = ['cpf', 'user_id'];
 
     public function pedido(){
