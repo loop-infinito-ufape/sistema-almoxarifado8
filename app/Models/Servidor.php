@@ -12,26 +12,19 @@ class Servidor extends Model
 
     use Notifiable;
 
-  //  protected $fillable = ['nome', 'cpf', 'telefone', 'if', 'sala_id', 'email', 'senha'];
     protected $fillable = ['if', 'user_id', 'sala_id'];
 
-    public static $rules = [//'nome' => 'required|min:10|max:100',
-                           // 'cpf' => 'required|cpf',
-                           // 'telefone' => 'required|size:11',
+    public static $rules = ['name' => 'required|min:10|max:100',
+                           'telefone' => 'required|size:11',
                             'if' => 'required|numeric',
                             'sala_id' => 'nullable|numeric',
-                         //   'email' => 'required|email',
-                           // 'senha' => 'required|min:8'
 
     ];
 
-    public static $messages = [//'nome.*' => "O campo deve contêr entre 10 e 100 caracteres.",
-                              //  'cpf.*'=> "CPF inválido.",
-                              //  'telefone.*'=> "Telefone inválido.",
+    public static $messages = ['name.*' => "Nome é obrigatório e deve ter até 255 caracteres.",
+                                'telefone.*'=> "Telefone inválido.",
                                 'if.*'=> "IF inválido.",
                                 'sala_id.*'=> "Sala deve ser um valor numérico.",
-                             //   'email.*'=> "Email inválido.",
-                             //   'senha.*'=> "Senha deve ter no mínimo 8 caracteres."
     ];
 
     public function pedido(){
