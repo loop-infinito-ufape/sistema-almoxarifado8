@@ -38,4 +38,14 @@ class Servidor extends Model
     public function user(){
         return $this->belongsTo('app\Models\User');
     }
+
+    public static function getServidorPorIdUser($id){
+        $servidores = Servidor::all();
+        foreach($servidores as $servidor) {
+            if($servidor->user_id == $id) {
+                return $servidor->id;
+            }
+        }
+        return -1;
+    }
 }
