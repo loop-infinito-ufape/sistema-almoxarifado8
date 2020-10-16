@@ -10,10 +10,11 @@
 </head>
 <body>
 
-<form action="{{route('pedido.criar')}}" method="POST">
+<form action="{{route('pedido.criarTemporiamente')}}" method="POST">
     @csrf
     <div>
         <h1>Cadastro Pedido</h1>
+        <h3 style="color: darkgreen">{{$mensagem}}</h3>
     </div>
 
     <div class="form-group ">
@@ -21,23 +22,7 @@
             <label for="tipo_equipamento_id">Tipo Equipamento</label>
             <select name="tipo_equipamento_id" id="tipo_equipamento_id" class="form-control @error('tipo_equipamento_id') is-invalid @enderror"  name="tipo_equipamento_id" required autocomplete="tipo_equipamento_id" autofocus >
                 @foreach($tiposEquipamentos as $tipoEquipamento)
-                    <option id="optionComOValor" value="{{$tipoEquipamento->id}}">{{$tipoEquipamento->nome}}</option>
-                @endforeach
-            </select>
-            @error('tipo_equipamento_id')
-            <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-            @enderror
-        </div>
-    </div>
-
-    <div class="form-group ">
-        <div>
-            <label for="servidor_id">Nome Servidor</label>
-            <select name="servidor_id" id="servidor_id" class="form-control @error('servidor_id') is-invalid @enderror"  name="servidor_id" required autocomplete="servidor_id" autofocus >
-                @foreach($Servidores as $Servidore)
-                    <option id="optionComOValor" value="{{$Servidore->id}}">{{$Servidore->nome}}</option>
+                    <option {{$tipoEquipamento->id == $tipo_equipamento_id ? 'selected' : ''}} id="optionComOValor" value="{{$tipoEquipamento->id}}">{{$tipoEquipamento->nome}}</option>
                 @endforeach
             </select>
             @error('tipo_equipamento_id')
@@ -51,7 +36,7 @@
     <div class="form-group ">
         <div>
             <label for="quantidade_pedida">Quantidade</label>
-            <input id="quantidade_pedida" type="number" class="form-control @error('quantidade_pedida') is-invalid @enderror" name="quantidade_pedida" value="{{ old('quantidade_pedida') }}" autocomplete="quantidade_pedida" autofocus>
+            <input id="quantidade_pedida" type="number" class="form-control @error('quantidade_pedida') is-invalid @enderror" name="quantidade_pedida" value="{{ $quantidade_pedida }}" autocomplete="quantidade_pedida" autofocus>
         </div>
         @error('quantidade_pedida')
         <span class="invalid-feedback" role="alert">
@@ -63,7 +48,7 @@
     <div class="form-group ">
         <div>
             <label for="descricao">Descrição</label>
-            <input id="descricao" type="text" class="form-control @error('descricao') is-invalid @enderror" name="descricao" value="{{ old('descricao') }}" autocomplete="descricao" autofocus>
+            <input id="descricao" type="text" class="form-control @error('descricao') is-invalid @enderror" name="descricao" value="{{ $descricao }}" autocomplete="descricao" autofocus>
 
             @error('descricao')
             <span class="invalid-feedback" role="alert">
@@ -75,12 +60,26 @@
 
     <div class="form-group">
         <div>
-            <button type="submit" >{{ __('Cadastrar') }}</button>
+            <button type="submit" >{{ __('Anexar') }}</button>
         </div>
     </div>
 
 
 </form>
+
+<div>
+    <h3>Lista de Equipamentos</h3>
+    @foreach(Session::get('pedidos') as $k => $item)
+
+        <a href="editar?quantidade_pedida={{$item['quantidade_pedida']}}&descricao={{$item['descricao']}}&tipo_equipamento_id={{$item['tipo_equipamento_id']}}"><span style="font-weight: bold;">Nome:</span> {{ $item['nome_equipamento']}} <span style="font-weight: bold;">Descrição:</span> {{$item['descricao']}} <span style="font-weight: bold;">QTD:</span> {{$item['quantidade_pedida']}}</a>
+        <p></p>
+
+    @endforeach
+
+    <div style="background: #000">
+        <a href="cadastrar"><span style="font-weight: bold;">Concluir</span></a>
+    </div>
+<div>
 
 </body>
 </html>

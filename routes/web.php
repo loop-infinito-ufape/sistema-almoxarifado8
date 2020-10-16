@@ -37,9 +37,11 @@ Route::post('tipoEquipamento/cadastrar', [TipoEquipamentoController::class, 'cad
 Route::get('patrimonio/cadastrar', [PatrimonioController::class, 'prepararCadastro']);
 Route::post('patrimonio/cadastrar', [PatrimonioController::class, 'cadastrar'])->name('patrimonio.criar');
 
-//Patrimonio
+//Pedido
 Route::get('pedido/cadastrar', [PedidoController::class, 'prepararCadastro']);
-Route::post('pedido/cadastrar', [PedidoController::class, 'cadastrar'])->name('pedido.criar');
+Route::get('pedido/editar', [PedidoController::class, 'editar'])->name('pedido.editar');
+Route::get('pedido/cadastrar', [PedidoController::class, 'cadastrar'])->name('pedido.criar');
+Route::post('pedido/cadastrar', [PedidoController::class, 'cadastrarTemporariamente'])->name('pedido.criarTemporiamente');
 
 Auth::routes();
 
