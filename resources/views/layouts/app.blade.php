@@ -112,7 +112,7 @@
                 <div class="col-md-2 remover-margin">
                     <ul class="nav navbar-nav flex-column barra-cinza text-center">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('home')}}">Pedidos</a>
+                            <a class="nav-link" href="{{route('pedido.criar')}}">Pedidos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="">Solicitar</a>
@@ -124,6 +124,35 @@
                             <a class="nav-link" href="{{route('servidor.editar')}}">Perfil</a>
                         </li>
                     </ul>
+                </div>
+
+                <div class="col-md-10">
+                    <main >
+                        @yield('content')
+                    </main>
+                </div>
+            @elseif(isset(Auth::user()->funcionario))
+            <div class="col-md-2 remover-margin">
+                <ul class="nav navbar-nav flex-column barra-cinza text-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('pedido.criar')}}">Pedidos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">Histórico</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('funcionario.editar')}}">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Estoque</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Servidores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Funcionários</a>
+                    </li>
+                </ul>
                 </div>
 
                 <div class="col-md-10">

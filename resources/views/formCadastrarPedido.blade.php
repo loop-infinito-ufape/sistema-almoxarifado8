@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+@extends('layouts.app')
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
+@section('content')
 
 <form action="{{route('pedido.criarTemporiamente')}}" method="POST">
     @csrf
     <div>
         <h1>Cadastro Pedido</h1>
-        <h3 style="color: darkgreen">{{$mensagem}}</h3>
+        @if(str_contains($mensagem, 'Error:'))
+            <h3 style="color: red">{{$mensagem}}</h3>
+        @else
+            <h3 style="color: darkgreen">{{$mensagem}}</h3>
+        @endif
     </div>
 
     <div class="form-group ">
@@ -83,3 +79,4 @@
 
 </body>
 </html>
+@endsection
