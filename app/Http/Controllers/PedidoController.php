@@ -33,14 +33,19 @@ class PedidoController extends Controller
     // salva no banco de dados os pedidos
     public function cadastrar(Request $request){
         try {
-            $pedidos = $request->session()->get('pedidos');
-            foreach ($pedidos as $pedido) {
-                PedidoValidator::validate($pedido);
-                Pedido::create($pedido);
-            }
             $mensagem = '';
-            if(count($pedidos) > 0) {
-                $mensagem = 'Pedido(s) adicionados';
+            $pedidos = $request->session()->get('pedidos');
+            if ($pedidos) {
+                foreach ($pedidos as $pedido) {
+                    PedidoValidator::validate($pedido);
+                    Pedido::create($pedido);
+                    $tipo_equipamento = TipoEquipamento::find($pedido['tipo_equipamento_id']);
+                    $tipo_equipamento['quantidade'] = $tipo_equipamento['quantidade'] - $pedido['quantidade_pedida'];
+                    $tipo_equipamento->save();
+                }
+                if(count($pedidos) > 0) {
+                    $mensagem = 'Pedido(s) adicionados';
+                }
             }
             $request->session()->put('pedidos', []);
             $tiposEquipamentos = TipoEquipamento::all();
@@ -75,24 +80,29 @@ class PedidoController extends Controller
         }
         $id = $request->tipo_equipamento_id;
 
+        $mensagem = '';
+
         if(array_key_exists($id, $pedidos)) {
             $pedidos[$id]['quantidade_pedida'] = $request->quantidade_pedida;
             $pedidos[$id]['descricao'] = $request->descricao;
         } else {
             $dados = $request->all();
             $tipo_equipamento = TipoEquipamento::find($id);
-            $pedido = array(
-                'quantidade_despachadada' => 0,
-                'data_inicial' => Date::now(),
-                'status' => 0,
-                'servidor_id' => Servidor::getServidorPorIdUser(Auth::user()->id),
-                'descricao' => $dados['descricao'],
-                'quantidade_pedida' => $dados['quantidade_pedida'],
-                'tipo_equipamento_id' => $dados['tipo_equipamento_id'],
-                'nome_equipamento' => $tipo_equipamento->nome,
-            );
-
-            $pedidos[$id] = $pedido;
+            if ($dados['quantidade_pedida'] <= $tipo_equipamento['quantidade']) {
+                $pedido = array(
+                    'quantidade_despachadada' => 0,
+                    'data_inicial' => Date::now(),
+                    'status' => 0,
+                    'servidor_id' => Servidor::getServidorPorIdUser(Auth::user()->id),
+                    'descricao' => $dados['descricao'],
+                    'quantidade_pedida' => $dados['quantidade_pedida'],
+                    'tipo_equipamento_id' => $dados['tipo_equipamento_id'],
+                    'nome_equipamento' => $tipo_equipamento->nome,
+                );
+                $pedidos[$id] = $pedido;
+            } else {
+                $mensagem = 'Error: Não temos a quantidade suficiente desse produto';
+            }
         }
 
         $request->session()->put('pedidos', $pedidos);
@@ -104,7 +114,7 @@ class PedidoController extends Controller
                 "quantidade_pedida" => '',
                 "descricao" => '',
                 "tipo_equipamento_id" => '',
-                "mensagem" => '',
+                "mensagem" => $mensagem,
             ]);;
     }
 
