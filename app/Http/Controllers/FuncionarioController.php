@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EnvioDeEmail;
 use App\Models\Funcionario;
+use App\Models\Servidor;
 use App\Models\User;
 use App\Validator\FuncionarioValidator;
 use App\Validator\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class FuncionarioController extends Controller
 {
@@ -44,5 +47,23 @@ class FuncionarioController extends Controller
                 ->withErrors($exception->getValidator())
                 ->withInput();
         }
+    }
+
+    public function listarServidores(){
+        $aux = Servidor::All();
+
+        $servidores = array();
+        foreach ($aux as $user){
+            //$ajuda = User::where('id', $user->user_id)->get();
+            $ajuda = User::find($user->user_id);
+            array_push($servidores,$ajuda);
+        }
+        return view('listarServidores',['servidores'=>$servidores]);
+    }
+    public function enviarEmail(Request $request){
+        $user = User::find($request->id);
+        //return new EnvioDeEmail($user);
+        Mail::send(new EnvioDeEmail($user));
+        return redirect('/listar/servidores');
     }
 }
