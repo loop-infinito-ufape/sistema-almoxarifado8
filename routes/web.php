@@ -57,3 +57,11 @@ Route::post('/funcionario/editar', [FuncionarioController::class, 'editar'])->na
 Route::get('/servidor/editar', [ServidorController::class, 'prepararEditar']);
 Route::post('/servidor/editar', [ServidorController::class, 'editar'])->name('servidor.editar');
 
+//ListarEquipamento
+Route::get('/tipoEquipamento/listar',[TipoEquipamentoController::class,'listar'])->name('listarEquipamentos');
+
+//AdicionarEquipamento
+Route::get('/tipoEquipamento/adicionar',[TipoEquipamentoController::class,'prepararAdicionar'])->name('prepararAdicionar');
+Route::post('/tipoEquipamento/adicionar',[TipoEquipamentoController::class,'adicionar'])->name('adicionar');
+Route::post('/tipoEquipamento/anexar',[TipoEquipamentoController::class,'anexar'])->name('anexar');
+Route::get('/tipoEquipamento/remover/{id}',[TipoEquipamentoController::class,'remover'])->name('remover');
