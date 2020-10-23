@@ -112,10 +112,10 @@
                 <div class="col-md-2 remover-margin">
                     <ul class="nav navbar-nav flex-column barra-cinza text-center">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('pedido.criar')}}">Pedidos</a>
+                            <a class="nav-link" href="{{route('pedido.listapendetes')}}">Pedidos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Solicitar</a>
+                            <a class="nav-link" href="{{route('pedido.criar')}}">Solicitar</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Histórico</a>
