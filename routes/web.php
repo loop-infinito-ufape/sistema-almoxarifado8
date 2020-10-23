@@ -50,8 +50,13 @@ Route::get('/funcionarioRegister', [FuncionarioRegisterController::class, 'showR
 Route::post('/funcionarioRegister', [FuncionarioRegisterController::class, 'register'])->name('funcionario.register');
 
 //funcionario
-Route::get('/funcionario/editar', [FuncionarioController::class, 'prepararEditar']);
-Route::post('/funcionario/editar', [FuncionarioController::class, 'editar'])->name('funcionario.editar');
+
+Route::group(['middleware'=> 'FuncionarioMiddleware'], function() {
+
+    Route::get('/funcionario/editar', [FuncionarioController::class, 'prepararEditar']);
+    Route::post('/funcionario/editar', [FuncionarioController::class, 'editar'])->name('funcionario.editar');
+    Route::get('/listar/servidores',[FuncionarioController::class, 'listarServidores']);
+});
 
 //servidor
 Route::get('/servidor/editar', [ServidorController::class, 'prepararEditar']);
@@ -65,3 +70,6 @@ Route::get('/tipoEquipamento/adicionar',[TipoEquipamentoController::class,'prepa
 Route::post('/tipoEquipamento/adicionar',[TipoEquipamentoController::class,'adicionar'])->name('adicionar');
 Route::post('/tipoEquipamento/anexar',[TipoEquipamentoController::class,'anexar'])->name('anexar');
 Route::get('/tipoEquipamento/remover/{id}',[TipoEquipamentoController::class,'remover'])->name('remover');
+
+//Enviar email
+Route::get('/email/{id}',[FuncionarioController::class,'enviarEmail'])->name('enviarEmail');
