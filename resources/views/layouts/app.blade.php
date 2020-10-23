@@ -18,10 +18,45 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <style>
+        /* Modify the backgorund color */
+        .barra-cinza{
+            background-color: #D3D3D3;
+        }
+
+        .barra-cinza li a{
+            color: black;
+        }
+
+        .barra-cinza li:hover{
+            background-color: #C4C4C4;
+        }
+
+        .barra-cinza-escuro{
+            background-color: #C4C4C4;
+            height: 100px;
+            margin-right: -16px;
+        }
+
+        .remover-margin{
+            margin-left: -16px;
+            margin-top: -16px;
+            margin-bottom: -16px;
+
+        }
+
+
+        .nav {
+            height: calc(100vh - 100px);
+        }
+
+
+    </style>
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+<body class="bg-white">
+    <div id="app" >
+        <nav class="navbar navbar-expand-md navbar-light barra-cinza-escuro shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -72,9 +107,45 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <div class="modal-body row navbar-expand-m">
+            @if(isset(Auth::user()->servidor))
+                <div class="col-md-2 remover-margin">
+                    <ul class="nav navbar-nav flex-column barra-cinza text-center">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('home')}}">Pedidos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="">Solicitar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Histórico</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{route('servidor.editar')}}">Perfil</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-10">
+                    <main >
+                        @yield('content')
+                    </main>
+                </div>
+            @else
+                <div class="col-md-12">
+                    <main >
+                        @yield('content')
+                    </main>
+                </div>
+            @endif
+
+
+
+        </div>
+
+
+
     </div>
 </body>
 </html>
+

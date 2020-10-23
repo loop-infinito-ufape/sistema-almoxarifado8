@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 //sala
 Route::get('sala/cadastrar', [SalaController::class, 'prepararCadastro']);
@@ -37,9 +37,11 @@ Route::post('tipoEquipamento/cadastrar', [TipoEquipamentoController::class, 'cad
 Route::get('patrimonio/cadastrar', [PatrimonioController::class, 'prepararCadastro']);
 Route::post('patrimonio/cadastrar', [PatrimonioController::class, 'cadastrar'])->name('patrimonio.criar');
 
-//Patrimonio
+//Pedido
 Route::get('pedido/cadastrar', [PedidoController::class, 'prepararCadastro']);
-Route::post('pedido/cadastrar', [PedidoController::class, 'cadastrar'])->name('pedido.criar');
+Route::get('pedido/editar', [PedidoController::class, 'editar'])->name('pedido.editar');
+Route::get('pedido/cadastrar', [PedidoController::class, 'cadastrar'])->name('pedido.criar');
+Route::post('pedido/cadastrar', [PedidoController::class, 'cadastrarTemporariamente'])->name('pedido.criarTemporiamente');
 
 Auth::routes();
 
@@ -48,6 +50,7 @@ Route::get('/funcionarioRegister', [FuncionarioRegisterController::class, 'showR
 Route::post('/funcionarioRegister', [FuncionarioRegisterController::class, 'register'])->name('funcionario.register');
 
 //funcionario
+
 Route::group(['middleware'=> 'FuncionarioMiddleware'], function() {
 
     Route::get('/funcionario/editar', [FuncionarioController::class, 'prepararEditar']);
@@ -56,7 +59,7 @@ Route::group(['middleware'=> 'FuncionarioMiddleware'], function() {
 });
 
 //servidor
-Route::get('/servidor/editar', [ServidorController::class, 'prepararEditar'])->middleware('auth');
+Route::get('/servidor/editar', [ServidorController::class, 'prepararEditar']);
 Route::post('/servidor/editar', [ServidorController::class, 'editar'])->name('servidor.editar');
 
 //ListarEquipamento

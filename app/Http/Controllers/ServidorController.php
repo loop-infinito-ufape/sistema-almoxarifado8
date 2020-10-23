@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Hash;
 
 class ServidorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('ServidorMiddleware');
+    }
+
     public function prepararEditar(){
         $user = User::find(Auth::user()->id);
         $servidor = Servidor::where('user_id', $user->id)->first();
