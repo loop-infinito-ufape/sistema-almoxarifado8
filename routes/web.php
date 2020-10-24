@@ -38,6 +38,7 @@ Route::get('patrimonio/cadastrar', [PatrimonioController::class, 'prepararCadast
 Route::post('patrimonio/cadastrar', [PatrimonioController::class, 'cadastrar'])->name('patrimonio.criar');
 
 //Pedido
+Route::get('pedido/pedidospedentes', [PedidoController::class, 'listarPedidosPendentes'])->name('pedido.listapendetes');
 Route::get('pedido/cadastrar', [PedidoController::class, 'prepararCadastro']);
 Route::get('pedido/editar', [PedidoController::class, 'editar'])->name('pedido.editar');
 Route::get('pedido/cadastrar', [PedidoController::class, 'cadastrar'])->name('pedido.criar');

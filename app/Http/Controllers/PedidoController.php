@@ -130,4 +130,27 @@ class PedidoController extends Controller
             "mensagem" => '',
         ]);;
     }
+
+    public function listarPedidosPendentes(){
+        $pedidos = Pedido::all();
+        $pedidosAux = [];
+
+        foreach ($pedidos as $pedido) {
+            if($pedido['status'] == 0 || $pedido['status'] == 1) {
+                $tipo_equipamento = TipoEquipamento::find($pedido['tipo_equipamento_id']);
+                $pedidoAux = array(
+                    'id' => $pedido['id'],
+                    'status' => $pedido['status'] == 0 ? 'Pendente' : 'Parcialmente Concluído',
+                    'data_inicial' => Date::now(),
+                    'quantidade' => $pedido['quantidade_pedida'],
+                    'nome_equipamento' => $tipo_equipamento->nome,
+                );
+                array_push($pedidosAux, $pedidoAux);
+            }
+        }
+
+        return view("listarPedidosPendentes")->with([
+            "pedidos" => $pedidosAux,
+        ]);
+    }
 }
