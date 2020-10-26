@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\EnvioDeEmail;
 use App\Models\Funcionario;
+use App\Models\Pedido;
 use App\Models\Servidor;
 use App\Models\User;
 use App\Validator\FuncionarioValidator;
@@ -64,6 +65,35 @@ class FuncionarioController extends Controller
             array_push($servidores,$ajuda);
         }
         return view('listarServidores',['servidores'=>$servidores]);
+    }
+    public function listarFuncionarios(){
+        $aux = Funcionario::All();
+
+        $servidores = array();
+        foreach ($aux as $user){
+            //$ajuda = User::where('id', $user->user_id)->get();
+            $ajuda = User::find($user->user_id);
+            array_push($servidores,$ajuda);
+        }
+        return view('listarFuncionarios',['servidores'=>$servidores]);
+    }
+    public function listarPedidos(){
+        $aux = Pedido::All();
+        $aux2 = array();
+        foreach ($aux as $pedido){
+            //$ajuda = User::where('id', $user->user_id)->get();
+            $ajuda = Servidor::find($pedido->servidor_id);
+            array_push($aux2,$ajuda);
+        }
+        $servidor=array();
+        foreach ($aux2 as $user){
+            //$ajuda = User::where('id', $user->user_id)->get();
+            $ajuda = User::find($user->user_id);
+            array_push($servidor,$ajuda);
+        }
+
+
+        return view('listarPedidos',['pedidos'=>$aux,'servidores'=>$servidor]);
     }
     public function enviarEmail(Request $request){
         $user = User::find($request->id);
