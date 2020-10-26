@@ -35,4 +35,14 @@ class Funcionario extends Model
         return $this->belongsTo('app\Models\User');
     }
 
+    public static function getFuncionarioPorIdUser($id){
+        $funcionarios = Funcionario::all();
+        foreach($funcionarios as $funcionario) {
+            if($funcionario->user_id == $id) {
+                return $funcionario;
+            }
+        }
+        return null;
+    }
+
 }

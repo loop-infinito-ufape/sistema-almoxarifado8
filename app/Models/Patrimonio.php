@@ -30,4 +30,15 @@ class Patrimonio extends Model
     	return $this->belongsTo('app\Models\TipoEquipamento');
     }
 
+    public static function getPatrimoniosPorIdEquipamento($id) {
+        $patrimonios = Patrimonio::all();
+        $patriminiosAux = [];
+        foreach($patrimonios as $patrimonio) {
+            if($patrimonio->tipo_equipamento_id == $id) {
+                array_push($patriminiosAux, $patrimonio);
+            }
+        }
+        return $patriminiosAux;
+    }
+
 }
