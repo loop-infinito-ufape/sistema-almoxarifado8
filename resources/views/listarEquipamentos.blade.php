@@ -5,7 +5,18 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Listar equipamento') }}</div>
+                    <div class="card-header">{{ __('Listar equipamento') }}
+                        <a href="{{route('pedido.criar')}}">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Consumo -') }}
+                            </button>
+                        </a>
+                        <a href="{{route('prepararAdicionar')}}">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Adicionar + ') }}
+                            </button>
+                        </a>
+                    </div>
 
                     <div class="card-body">
                         <div class="form-group row">
