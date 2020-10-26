@@ -39,9 +39,12 @@ Route::post('patrimonio/cadastrar', [PatrimonioController::class, 'cadastrar'])-
 
 //Pedido
 Route::get('pedido/pedidospedentes', [PedidoController::class, 'listarPedidosPendentes'])->name('pedido.listapendetes');
+Route::get('pedido/pedidosconcluidos', [PedidoController::class, 'listarPedidosConcluidos'])->name('pedido.listaconcluidos');
 Route::get('pedido/cadastrar', [PedidoController::class, 'prepararCadastro']);
 Route::get('pedido/editar', [PedidoController::class, 'editar'])->name('pedido.editar');
 Route::get('pedido/cadastrar', [PedidoController::class, 'cadastrar'])->name('pedido.criar');
+Route::get('pedido/finalizar', [PedidoController::class, 'prepararFinalizacaoPedido'])->name('pedido.prepararfinalizacao');
+Route::post('pedido/finalizar', [PedidoController::class, 'concluirFinalizacaoPedido'])->name('pedido.concluirfinalizacao');
 Route::post('pedido/cadastrar', [PedidoController::class, 'cadastrarTemporariamente'])->name('pedido.criarTemporiamente');
 
 Auth::routes();

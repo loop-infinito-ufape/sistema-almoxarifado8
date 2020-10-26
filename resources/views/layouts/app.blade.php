@@ -11,6 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -118,7 +120,7 @@
                             <a class="nav-link" href="{{route('pedido.criar')}}">Solicitar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Histórico</a>
+                            <a class="nav-link" href="{{route('pedido.listaconcluidos')}}">Histórico</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('servidor.editar')}}">Perfil</a>
@@ -135,10 +137,10 @@
             <div class="col-md-2 remover-margin">
                 <ul class="nav navbar-nav flex-column barra-cinza text-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('pedido.criar')}}">Pedidos</a>
+                        <a class="nav-link" href="{{route('pedido.listapendetes')}}">Pedidos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">Histórico</a>
+                        <a class="nav-link" href="{{route('pedido.listaconcluidos')}}">Histórico</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('funcionario.editar')}}">Perfil</a>
