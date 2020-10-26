@@ -45,17 +45,23 @@ Route::post('pedido/cadastrar', [PedidoController::class, 'cadastrarTemporariame
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/funcionarioRegister', [FuncionarioRegisterController::class, 'showRegistrationForm']);
 Route::post('/funcionarioRegister', [FuncionarioRegisterController::class, 'register'])->name('funcionario.register');
 
 //funcionario
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware'=> 'FuncionarioMiddleware'], function() {
 
     Route::get('/funcionario/editar', [FuncionarioController::class, 'prepararEditar']);
     Route::post('/funcionario/editar', [FuncionarioController::class, 'editar'])->name('funcionario.editar');
-    Route::get('/listar/servidores',[FuncionarioController::class, 'listarServidores']);
+    Route::get('/listar/servidores',[FuncionarioController::class, 'listarServidores'])->name('funcionario.lista.servidor');
+    Route::get('/listar/funcionarios',[FuncionarioController::class, 'listarFuncionarios'])->name('funcionario.lista.funcionario');
+    Route::get('/pedidos/listar',[FuncionarioController::class, 'listarPedidos'])->name('pedido.listar');
+});
+Route::group(['middleware'=> 'ServidorMiddleware'], function() {
+
+
 });
 
 //servidor
