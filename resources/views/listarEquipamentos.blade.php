@@ -6,7 +6,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">{{ __('Listar equipamento') }}
-                        <a href="{{route('pedido.criar')}}">
+                        <a href="{{route('pedido.preparar')}}">
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Consumo -') }}
                             </button>
@@ -16,17 +16,24 @@
                                 {{ __('Adicionar + ') }}
                             </button>
                         </a>
+                        <a href="{{route('tipoEquipamento.prepararCriar')}}">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Criar Equipamento + ') }}
+                            </button>
+                        </a>
                     </div>
 
                     <div class="card-body">
                         <div class="form-group row">
-                            <table>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nome</th>
-                                    <th>Descrição</th>
-                                    <th>Quantidade</th>
-                                </tr>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>Descrição</th>
+                                        <th>Quantidade</th>
+                                    </tr>
+                                </thead>
                                 @foreach($tipos as $tipo)
                                     <tr>
                                         <td>{{$tipo->id}}</td>

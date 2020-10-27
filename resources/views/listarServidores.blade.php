@@ -9,12 +9,14 @@
 
                     <div class="card-body">
                         <div class="form-group row">
-                            <table>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nome</th>
-                                    <th>Email</th>
-                                </tr>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                    </tr>
+                                </thead>
                                 @foreach($servidores as $servidor)
                                     <tr>
                                         <td>{{$servidor->id}}</td>
