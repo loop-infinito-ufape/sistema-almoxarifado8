@@ -77,24 +77,6 @@ class FuncionarioController extends Controller
         }
         return view('listarFuncionarios',['servidores'=>$servidores]);
     }
-    public function listarPedidos(){
-        $aux = Pedido::All();
-        $aux2 = array();
-        foreach ($aux as $pedido){
-            //$ajuda = User::where('id', $user->user_id)->get();
-            $ajuda = Servidor::find($pedido->servidor_id);
-            array_push($aux2,$ajuda);
-        }
-        $servidor=array();
-        foreach ($aux2 as $user){
-            //$ajuda = User::where('id', $user->user_id)->get();
-            $ajuda = User::find($user->user_id);
-            array_push($servidor,$ajuda);
-        }
-
-
-        return view('listarPedidos',['pedidos'=>$aux,'servidores'=>$servidor]);
-    }
     public function enviarEmail(Request $request){
         $user = User::find($request->id);
         //return new EnvioDeEmail($user);
