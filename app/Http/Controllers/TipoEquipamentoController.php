@@ -19,7 +19,7 @@ class TipoEquipamentoController extends Controller
             TipoEquipamentoValidator::validate($request->all());
             $dados = $request->all();
             TipoEquipamento::create($dados);
-            return "Tipo Equpamento criado";
+            return redirect(route('listarEquipamentos'));
         }catch (ValidationException $exception){
             return redirect(route('tipoEquipamento.criar'))
                 ->withErrors($exception->getValidator())
