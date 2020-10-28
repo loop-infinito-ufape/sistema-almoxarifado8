@@ -45,6 +45,8 @@ Route::get('pedido/cadastrar', [PedidoController::class, 'cadastrar'])->name('pe
 Route::get('pedido/finalizar', [PedidoController::class, 'prepararFinalizacaoPedido'])->name('pedido.prepararfinalizacao');
 Route::post('pedido/finalizar', [PedidoController::class, 'concluirFinalizacaoPedido'])->name('pedido.concluirfinalizacao');
 Route::post('pedido/cadastrar', [PedidoController::class, 'cadastrarTemporariamente'])->name('pedido.criarTemporiamente');
+Route::get('pedido/parcial/remover/{id}',[PedidoController::class,'removerParcial'])->name('pedido.removerparcial');
+
 //Anexar patrimonios
 Route::post('/pedido/finalizar/anexarPatrimonio',[PedidoController::class,'anexarPatrimonio'])->name('patrimonio.anexar');
 Route::get('/teste',[PedidoController::class,'teste'])->name('teste');

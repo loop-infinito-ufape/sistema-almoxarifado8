@@ -23,7 +23,12 @@ class PedidoController extends Controller
 {
     public function prepararCadastro(Request $request){
         $tiposEquipamentos = TipoEquipamento::all();
-        $request->session()->put('pedidos', []);
+        if($request->session()->has('pedidos')) {
+            $pedidos = $request->session()->get('pedidos');
+        } else {
+            $pedidos = array();
+        }
+        $request->session()->put('pedidos',$pedidos);
 
         return view("formCadastrarPedido")->with([
             "tiposEquipamentos" => $tiposEquipamentos,
@@ -427,5 +432,19 @@ class PedidoController extends Controller
         $pedido = Pedido::find($request->id_pedido);
         $equipamento = TipoEquipamento::find($pedido->tipo_equipamento_id);
         return redirect(route('pedido.prepararfinalizacao',['id_equipamento'=>$pedido->tipo_equipamento_id,'id_pedido'=>$pedido->id,'nome_equipamento'=>$equipamento->nome,'quantidade'=>$pedido->quantidade_pedida,'descricao'=>$equipamento->descricao]));
+    }
+    public function removerParcial(Request $request){
+        if($request->session()->has('pedidos')) {
+            $pedidos = $request->session()->get('pedidos');
+        } else {
+            $pedidos = array();
+        }
+        $id = $request->id;
+        if(array_key_exists($id,$pedidos)){
+            unset($pedidos[$id]);
+        }
+        $request->session()->put('pedidos',$pedidos);
+        return redirect(route('pedido.preparar'));
+
     }
 }
