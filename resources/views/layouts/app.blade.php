@@ -114,13 +114,13 @@
                 <div class="col-md-2 remover-margin">
                     <ul class="nav navbar-nav flex-column barra-cinza text-center">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('pedido.listapendetes')}}">Pedidos</a>
+                            <a class="nav-link" href="{{route('pedido.listar')}}">Pedidos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('pedido.criar')}}">Solicitar</a>
+                            <a class="nav-link" href="{{route('pedido.preparar')}}">Solicitar</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('pedido.listaconcluidos')}}">Histórico</a>
+                            <a class="nav-link" href="{{route('pedido.concluidos')}}">Histórico</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('servidor.editar')}}">Perfil</a>
@@ -146,13 +146,13 @@
                         <a class="nav-link" href="{{route('funcionario.editar')}}">Perfil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Estoque</a>
+                        <a class="nav-link" href="{{route('listarEquipamentos')}}">Estoque</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Servidores</a>
+                        <a class="nav-link" href="{{route('funcionario.lista.servidor')}}">Servidores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Funcionários</a>
+                        <a class="nav-link" href="{{route('funcionario.lista.funcionario')}}">Funcionários</a>
                     </li>
                 </ul>
                 </div>

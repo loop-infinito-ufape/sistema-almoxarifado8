@@ -9,15 +9,17 @@
 
                     <div class="card-body">
                         <div class="form-group row">
-                            <table style="width: 100%; text-align: center;">
-                                <tr>
-                                    <th>Equipamento</th>
-                                    <th>Servidor</th>
-                                    <th>Data</th>
-                                    <th>Status</th>
-                                    <th>Quantidade</th>
-                                    <th></th>
-                                </tr>
+                            <table style="width: 100%; text-align: center;" class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Equipamento</th>
+                                        <th>Servidor</th>
+                                        <th>Data</th>
+                                        <th>Status</th>
+                                        <th>Quantidade</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
                                 @foreach($pedidos as $pedido)
                                     <tr>
                                         <td>{{$pedido['nome_equipamento']}}</td>

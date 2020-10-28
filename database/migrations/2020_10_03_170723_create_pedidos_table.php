@@ -24,7 +24,7 @@ class CreatePedidosTable extends Migration
             $table->string('observacao')->nullable();
 
             $table->integer('funcionario_id')->unsigned()->nullable();
-            $table->integer('servidor_id')->unsigned();
+            $table->integer('servidor_id')->unsigned()->nullable();
             $table->integer('tipo_equipamento_id')->unsigned();
             $table->integer('pedido_anterior_id')->unsigned()->nullable();
 

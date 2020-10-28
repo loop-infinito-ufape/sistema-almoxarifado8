@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Listar Servidores') }}</div>
+                    <div class="card-header">{{ __('Listar Pedidos') }}</div>
 
                     <div class="card-body">
                         <div class="form-group row">
@@ -13,17 +13,18 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Nome</th>
-                                        <th>Email</th>
+                                        <th>Descrição</th>
+                                        <th>Quantidade</th>
                                     </tr>
                                 </thead>
-                                @foreach($servidores as $servidor)
+                                @foreach($pedidos as $pedido)
                                     <tr>
-                                        <td>{{$servidor->id}}</td>
-                                        <td>{{$servidor->name}}</td>
-                                        <td>{{$servidor->email}}</td>
+                                        <td>{{$pedido->id}}</td>
+                                        <td>{{$pedido->descricao}}</td>
+                                        <td>{{$pedido->quantidade_pedida}}</td>
                                     </tr>
                                 @endforeach
+
                             </table>
                         </div>
                     </div>

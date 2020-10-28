@@ -30,7 +30,7 @@ Route::get('sala/cadastrar', [SalaController::class, 'prepararCadastro']);
 Route::post('sala/cadastrar', [SalaController::class, 'cadastrar'])->name('sala.criar');
 
 //Tipo Equipamento
-Route::get('tipoEquipamento/cadastrar', [TipoEquipamentoController::class, 'prepararCadastro']);
+Route::get('tipoEquipamento/cadastrar', [TipoEquipamentoController::class, 'prepararCadastro'])->name('tipoEquipamento.prepararCriar');
 Route::post('tipoEquipamento/cadastrar', [TipoEquipamentoController::class, 'cadastrar'])->name('tipoEquipamento.criar');
 
 //Patrimonio
@@ -38,28 +38,40 @@ Route::get('patrimonio/cadastrar', [PatrimonioController::class, 'prepararCadast
 Route::post('patrimonio/cadastrar', [PatrimonioController::class, 'cadastrar'])->name('patrimonio.criar');
 
 //Pedido
-Route::get('pedido/pedidospedentes', [PedidoController::class, 'listarPedidosPendentes'])->name('pedido.listapendetes');
 Route::get('pedido/pedidosconcluidos', [PedidoController::class, 'listarPedidosConcluidos'])->name('pedido.listaconcluidos');
-Route::get('pedido/cadastrar', [PedidoController::class, 'prepararCadastro']);
+Route::get('pedido/preparar', [PedidoController::class, 'prepararCadastro'])->name('pedido.preparar');
 Route::get('pedido/editar', [PedidoController::class, 'editar'])->name('pedido.editar');
 Route::get('pedido/cadastrar', [PedidoController::class, 'cadastrar'])->name('pedido.criar');
 Route::get('pedido/finalizar', [PedidoController::class, 'prepararFinalizacaoPedido'])->name('pedido.prepararfinalizacao');
 Route::post('pedido/finalizar', [PedidoController::class, 'concluirFinalizacaoPedido'])->name('pedido.concluirfinalizacao');
 Route::post('pedido/cadastrar', [PedidoController::class, 'cadastrarTemporariamente'])->name('pedido.criarTemporiamente');
+Route::get('pedido/parcial/remover/{id}',[PedidoController::class,'removerParcial'])->name('pedido.removerparcial');
 
+//Anexar patrimonios
+Route::post('/pedido/finalizar/anexarPatrimonio',[PedidoController::class,'anexarPatrimonio'])->name('patrimonio.anexar');
+Route::get('/teste',[PedidoController::class,'teste'])->name('teste');
+Route::get('/remover/patrimonio/{id}/{id_pedido}',[PedidoController::class,'removerPatrimonio'])->name('remover.patrimonio');
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/funcionarioRegister', [FuncionarioRegisterController::class, 'showRegistrationForm']);
 Route::post('/funcionarioRegister', [FuncionarioRegisterController::class, 'register'])->name('funcionario.register');
 
 //funcionario
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware'=> 'FuncionarioMiddleware'], function() {
 
     Route::get('/funcionario/editar', [FuncionarioController::class, 'prepararEditar']);
     Route::post('/funcionario/editar', [FuncionarioController::class, 'editar'])->name('funcionario.editar');
-    Route::get('/listar/servidores',[FuncionarioController::class, 'listarServidores']);
+    Route::get('/listar/servidores',[FuncionarioController::class, 'listarServidores'])->name('funcionario.lista.servidor');
+    Route::get('/listar/funcionarios',[FuncionarioController::class, 'listarFuncionarios'])->name('funcionario.lista.funcionario');
+    Route::get('pedido/pedidospedentes', [PedidoController::class, 'listarPedidosPendentes'])->name('pedido.listapendetes');
+
+});
+Route::group(['middleware'=> 'ServidorMiddleware'], function() {
+    Route::get('pedido/listar',[PedidoController::class, 'listarMeusPedidos'])->name('pedido.listar');
+    Route::get('pedido/concluidos', [PedidoController::class, 'listarMeusPedidosConcluidos'])->name('pedido.concluidos');
+
 });
 
 //servidor
@@ -74,6 +86,7 @@ Route::get('/tipoEquipamento/adicionar',[TipoEquipamentoController::class,'prepa
 Route::post('/tipoEquipamento/adicionar',[TipoEquipamentoController::class,'adicionar'])->name('adicionar');
 Route::post('/tipoEquipamento/anexar',[TipoEquipamentoController::class,'anexar'])->name('anexar');
 Route::get('/tipoEquipamento/remover/{id}',[TipoEquipamentoController::class,'remover'])->name('remover');
+
 
 //Enviar email
 Route::get('/email/{id}',[FuncionarioController::class,'enviarEmail'])->name('enviarEmail');

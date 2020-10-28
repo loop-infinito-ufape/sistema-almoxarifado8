@@ -25,9 +25,11 @@ class HomeController extends Controller
     public function index()
     {
         if(Auth::user()->funcionario != null){
-            return view('funcionario.homeFuncionario');
+            #return view('funcionario.homeFuncionario');
+            return redirect(route('pedido.listapendetes'));
         }
-        return view('servidor.homeServidor');
+        #return view('servidor.homeServidor');
+        return redirect(route('pedido.listar'));
 
     }
 }
