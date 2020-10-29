@@ -24,21 +24,25 @@
     <style>
         /* Modify the backgorund color */
         .barra-cinza{
-            background-color: #D3D3D3;
+            background-color: #233643;
+            
+
         }
 
         .barra-cinza li a{
-            color: black;
+            color: white;
+            border-bottom: 1px solid #16222A;
         }
 
         .barra-cinza li:hover{
-            background-color: #C4C4C4;
+            background-color: #16222A;
         }
 
         .barra-cinza-escuro{
-            background-color: #C4C4C4;
+            background-color: #16222A;
             height: 100px;
             margin-right: -16px;
+
         }
 
         .remover-margin{
@@ -48,21 +52,97 @@
 
         }
 
-
         .nav {
-            height: calc(100vh - 100px);
+            /*height: calc(100vh - 100px);*/
+            min-height: calc(100vh - 100px);
+            margin-top: 116px;
         }
+
+        .barra-welcome {
+            background-color: #16222A;
+            margin-top: -16px;
+            margin-left: -16px;
+            margin-right: -16px;
+            margin-bottom: 80px;
+            padding-top: 50px;
+            padding-bottom: 100px;
+            font-family: 'Oswald';
+            color: white;
+        }
+
+        .cards-vantagens {
+            margin-bottom: 20px;
+            
+        }
+
+        .cards-vantagens .card {
+            
+            background-color: #233643;
+        }
+
+        .conteudo {
+            margin-top: 110px;
+        }
+
+        .conteudo-nao-logado{
+            margin-top: 100px;
+        }
+
+        /*FOOTER*/
+
+        footer {
+          background: #16222A;
+          color: white;
+          margin-top:100px;
+          margin-right: -16px;
+          margin-left: -16px;
+        }
+
+        footer a {
+          color: #fff;
+          font-size: 14px;
+          transition-duration: 0.2s;
+        }
+
+        footer a:hover {
+          color: #FA944B;
+          text-decoration: none;
+        }
+
+        .copy {
+          font-size: 12px;
+          padding: 10px;
+          border-top: 1px solid #FFFFFF;
+        }
+
+        .footer-middle {
+          padding-top: 2em;
+          color: white;
+        }
+
 
 
     </style>
 </head>
 <body class="bg-white">
     <div id="app" >
-        <nav class="navbar navbar-expand-md navbar-light barra-cinza-escuro shadow-sm">
+        <nav class="navbar navbar-expand-md fixed-top navbar-dark barra-cinza-escuro shadow-sm ">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                @guest
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                @endguest
+                @if(isset(Auth::user()->funcionario))
+                    <a class="navbar-brand" href="{{ route('pedido.listapendetes') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                @elseif(isset(Auth::user()->servidor))
+                    <a class="navbar-brand" href="{{ route('pedido.listar') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                @endif
+
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -111,7 +191,7 @@
 
         <div class="modal-body row navbar-expand-m">
             @if(isset(Auth::user()->servidor))
-                <div class="col-md-2 remover-margin">
+                <div class="col-md-2 remover-margin fixed-top">
                     <ul class="nav navbar-nav flex-column barra-cinza text-center">
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('pedido.listar')}}">Pedidos</a>
@@ -128,14 +208,14 @@
                     </ul>
                 </div>
 
-                <div class="col-md-10">
+                <div class="col-md-10 offset-2 conteudo">
                     <main >
                         @yield('content')
                     </main>
                 </div>
             @elseif(isset(Auth::user()->funcionario))
-            <div class="col-md-2 remover-margin">
-                <ul class="nav navbar-nav flex-column barra-cinza text-center">
+            <div class="col-md-2 remover-margin fixed-top">
+                <ul class="nav navbar-nav flex-column barra-cinza text-center ">
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('pedido.listapendetes')}}">Pedidos</a>
                     </li>
@@ -157,13 +237,13 @@
                 </ul>
                 </div>
 
-                <div class="col-md-10">
+                <div class="col-md-10 offset-2 conteudo">
                     <main >
                         @yield('content')
                     </main>
                 </div>
             @else
-                <div class="col-md-12">
+                <div class="col-md-12 conteudo-nao-logado">
                     <main >
                         @yield('content')
                     </main>
