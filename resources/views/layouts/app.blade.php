@@ -25,6 +25,7 @@
         /* Modify the backgorund color */
         .barra-cinza{
             background-color: #233643;
+            
 
         }
 
@@ -42,7 +43,6 @@
             height: 100px;
             margin-right: -16px;
 
-
         }
 
         .remover-margin{
@@ -53,7 +53,9 @@
         }
 
         .nav {
-            height: calc(100vh - 100px);
+            /*height: calc(100vh - 100px);*/
+            min-height: calc(100vh - 100px);
+            margin-top: 116px;
         }
 
         .barra-welcome {
@@ -76,6 +78,14 @@
         .cards-vantagens .card {
             
             background-color: #233643;
+        }
+
+        .conteudo {
+            margin-top: 110px;
+        }
+
+        .conteudo-nao-logado{
+            margin-top: 100px;
         }
 
         /*FOOTER*/
@@ -116,7 +126,7 @@
 </head>
 <body class="bg-white">
     <div id="app" >
-        <nav class="navbar navbar-expand-md navbar-dark barra-cinza-escuro shadow-sm ">
+        <nav class="navbar navbar-expand-md fixed-top navbar-dark barra-cinza-escuro shadow-sm ">
             <div class="container">
                 @guest
                     <a class="navbar-brand" href="{{ url('/') }}">
@@ -181,7 +191,7 @@
 
         <div class="modal-body row navbar-expand-m">
             @if(isset(Auth::user()->servidor))
-                <div class="col-md-2 remover-margin">
+                <div class="col-md-2 remover-margin fixed-top">
                     <ul class="nav navbar-nav flex-column barra-cinza text-center">
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('pedido.listar')}}">Pedidos</a>
@@ -198,14 +208,14 @@
                     </ul>
                 </div>
 
-                <div class="col-md-10">
+                <div class="col-md-10 offset-2 conteudo">
                     <main >
                         @yield('content')
                     </main>
                 </div>
             @elseif(isset(Auth::user()->funcionario))
-            <div class="col-md-2 remover-margin">
-                <ul class="nav navbar-nav flex-column barra-cinza text-center">
+            <div class="col-md-2 remover-margin fixed-top">
+                <ul class="nav navbar-nav flex-column barra-cinza text-center ">
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('pedido.listapendetes')}}">Pedidos</a>
                     </li>
@@ -227,13 +237,13 @@
                 </ul>
                 </div>
 
-                <div class="col-md-10">
+                <div class="col-md-10 offset-2 conteudo">
                     <main >
                         @yield('content')
                     </main>
                 </div>
             @else
-                <div class="col-md-12">
+                <div class="col-md-12 conteudo-nao-logado">
                     <main >
                         @yield('content')
                     </main>

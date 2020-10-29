@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row justify-content-center barra-welcome ">
+    <div class="row justify-content-center barra-welcome">
         
         <div class="row col-md-12 claro justify-content-center">
             <h1>vantagens de realizar suas requisições inteiramente online</h1>
