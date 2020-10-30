@@ -19,10 +19,10 @@ class FuncionarioValidatorTest extends TestCase
     {
         $this->assertTrue(true);
     }
-    public function testFuncionarioSemNome(){
+    public function testFuncionarioSemCPF(){
         $this->expectException(ValidationException::class);
         $funcionario = Funcionario::factory()->make();
-        $funcionario->nome = '';
+        $funcionario->cpf = '';
         FuncionarioValidator::validate($funcionario->toArray());
     }
 
@@ -33,10 +33,10 @@ class FuncionarioValidatorTest extends TestCase
         FuncionarioValidator::validate($funcionario->toArray());
     }
 
-    public function testFuncionarioNomeInvalido(){
+    public function testFuncionarioUSerIdInvalido(){
         $this->expectException(ValidationException::class);
         $funcionario = Funcionario::factory()->make();
-        $funcionario->nome = 'felipe';
+        $funcionario->user_id = '';
         FuncionarioValidator::validate($funcionario->toArray());
     }
 }
