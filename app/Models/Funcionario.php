@@ -17,6 +17,7 @@ class Funcionario extends Model
         'name' => ['required', 'string', 'max:255'],
         'telefone' => ['required', 'size:11'],
         'cpf' => ['required', 'cpf'],
+        'user_id' => ['required'],
     ];
 
     public static $messages = [
